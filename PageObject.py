@@ -13,7 +13,7 @@ class Locators:
     Region = (By.XPATH, '//*[@id="container"]/div[1]/div/div[3]/div[2]/div[1]/div/div[2]/span/span')
     Spisok_partnerov = (By.XPATH, '//*[@id="contacts_list"]/div/div[2]/div[2]/div/div[2]/div[1]/div[3]')
     Kamchtskij_krai = (By.XPATH, '//*[@id="popup"]/div[2]/div/div/div/div/div[2]/div/ul/li[43]/span/span')
-    Kamchatka_partner = (By.LINK_TEXT, "Петропавловск-Камчатский")
+
 
 class PageObject(BasePage):
     

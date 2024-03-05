@@ -40,7 +40,7 @@ def test_case_2(browser):
     Page.find_and_click(Locators.Contacts)
     #2
     element_1 = Page.element_to_find(Locators.Region)
-    assert element_1 == 'Ярославская обл.'
+    assert element_1.text == 'Ярославская обл.'
     element_2 = Page.element_to_find(Locators.Spisok_partnerov)
     assert element_2.is_displayed()
     #3
@@ -48,11 +48,12 @@ def test_case_2(browser):
     Page.find_and_click(Locators.Kamchtskij_krai)
     sleep(1)
     #4
-    element_1 = Page.element_to_find(Locators.Region)
-    assert element_1 == 'Камчатский край'
+    element_3 = Page.element_to_find(Locators.Region)
+    assert element_3.text == 'Камчатский край'
     assert browser.current_url == 'https://sbis.ru/contacts/41-kamchatskij-kraj?tab=clients'
-    element_3 =  Page.element_to_find(Locators.Kamchatka_partner)
-    assert element_3.is_displayed()
+    element_4 =  Page.element_to_find(Locators.Spisok_partnerov)
+    assert element_4.is_displayed()
+    assert 'Петропавловск-Камчатский' in element_4.text  
     sleep(1)
     assert browser.title == 'СБИС Контакты — Камчатский край'
     
