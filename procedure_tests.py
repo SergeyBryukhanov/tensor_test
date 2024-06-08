@@ -16,7 +16,8 @@ class Locators:
     Region = (By.XPATH, '//*[@id="container"]/div[1]/div/div[3]/div[2]/div[1]/div/div[2]/span/span')
     Spisok_partnerov = (By.XPATH, '//*[@id="contacts_list"]/div/div[2]/div[2]/div/div[2]/div[1]/div[3]')
     Kamchtskij_krai = (By.XPATH, '//*[@id="popup"]/div[2]/div/div/div/div/div[2]/div/ul/li[43]/span/span')
-    
+
+
 def element_to_find(driver, locator, time=5):
     element = WebDriverWait(driver, time).until(EC.presence_of_element_located(locator))
     return element
@@ -42,7 +43,7 @@ def test_1():
         sleep(2)
         driver.get(url=url)
         find_and_click(driver, Locators.Contacts)
-        #2        
+        #2
         find_and_click(driver, Locators.Tensor_link)
         #3
         switch_windows(driver, 1)
@@ -76,7 +77,7 @@ def test_2():
     driver = webdriver.Chrome()
     driver.maximize_window()
     sleep(2)
-    driver.get(url=url) 
+    driver.get(url=url)
     find_and_click(driver, Locators.Contacts)
     #2
     sleep(1)
@@ -93,7 +94,7 @@ def test_2():
     assert element_3.text == 'Камчатский край'
     assert driver.current_url == 'https://sbis.ru/contacts/41-kamchatskij-kraj?tab=clients'
     element_4 = element_to_find(driver, Locators.Spisok_partnerov)
-    assert 'Петропавловск-Камчатский' in element_4.text  
+    assert 'Петропавловск-Камчатский' in element_4.text
     assert element_4.is_displayed()
     assert driver.title == 'СБИС Контакты — Камчатский край'
     sleep(2)
