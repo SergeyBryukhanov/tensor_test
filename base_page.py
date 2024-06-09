@@ -9,10 +9,8 @@ class BasePage:
 
     def __init__(self, driver):
         self.driver = driver
-        self.driver.set_window_position(2000, 0)
-        self.driver.maximize_window()
 
-    def find_element(self, locator, time=5):
+    def find_element(self, locator, time=10):
         """
         Найти элемент и проскролить до него вниз по странице
         :param locator: локатор элемента
@@ -36,9 +34,3 @@ class BasePage:
         windows = self.driver.window_handles
         return self.driver.switch_to.window(windows[number])
 
-    def find_images(self):
-        return self.driver.find_elements(self, By.TAG_NAME, 'img')
-
-    def switch_windows(self, number):
-        windows = self.driver.window_handles
-        return self.driver.switch_to.window(windows[number])

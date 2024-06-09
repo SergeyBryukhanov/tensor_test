@@ -5,19 +5,19 @@ from selenium.webdriver.common.action_chains import ActionChains
 from base_page import BasePage
 
 
-class Locators:
-
-    Region = (By.XPATH, '//*[@id="container"]/div[1]/div/div[3]/div[2]/div[1]/div/div[2]/span/span')
-    Spisok_partnerov = (By.XPATH, '//*[@id="contacts_list"]/div/div[2]/div[2]/div/div[2]/div[1]/div[3]')
-    Kamchtskij_krai = (By.XPATH, '//*[@id="popup"]/div[2]/div/div/div/div/div[2]/div/ul/li[43]/span/span')
-
-
 class SbisHomePage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
+    link = "https://sbis.ru/"
+
     contacts = (By.LINK_TEXT, "Контакты")
     tensor_link = (By.CSS_SELECTOR, "[href='https://tensor.ru/']")
+    region = (By.CSS_SELECTOR, '.sbis_ru-Region-Chooser__text')
+    partners_list = (By.CSS_SELECTOR, '[data-qa="list"]')
 
     def open(self):
-        self.driver.get("https://sbis.ru/")
+        self.driver.get(self.link)
+
+    def find_images(self):
+        return self.driver.find_elements(self, By.TAG_NAME, 'img')
