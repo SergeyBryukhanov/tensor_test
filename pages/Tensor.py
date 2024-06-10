@@ -2,10 +2,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.action_chains import ActionChains
-from base_page import BasePage
+from pages.base_page import BasePage
 
 
-class TensorPage(BasePage):
+class TensorHomePage(BasePage):
     """
     Главная страница компании Тензор
     """
@@ -23,8 +23,8 @@ class TensorPage(BasePage):
 
         self.driver.get("https://tensor.ru/")
 
-    def verify_working_images(self, driver):
-        images = driver.find_elements(By.TAG_NAME, 'img')
+    def verify_working_images(self):
+        images = self.driver.find_elements(By.TAG_NAME, 'img')
         same_images_check = []
         for image in images[1:5]:
             size = image.size

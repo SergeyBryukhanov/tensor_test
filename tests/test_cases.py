@@ -2,17 +2,17 @@
 #  задание: https://cloud.mail.ru/attaches/17092842630329201983%3B0%3B1?folder-id=0&x-email=fizyaaa%40mail.ru&cvg=f
 
 from pages.SbisHomePage import SbisHomePage
-from pages.Tensor import TensorPage
+from pages.Tensor import TensorHomePage
 from pages.ListOfPartners import ListOfPartners
 
 
-def test_case_1(driver):
+def test_case_01(driver):
 
     tensor_url = "https://tensor.ru/"
     tensor_about_url = 'https://tensor.ru/about'
 
     sbis_page = SbisHomePage(driver)
-    tensor_page = TensorPage(driver)
+    tensor_page = TensorHomePage(driver)
 
     # 1
     sbis_page.open()
@@ -23,35 +23,39 @@ def test_case_1(driver):
     sbis_page.switch_windows(1)
     sbis_page.check_current_url(tensor_url)
     # 4
-    element = tensor_page.find_element(TensorPage.power_in_people)
-    assert element.is_displayed()
+    element = tensor_page.find_element(TensorHomePage.power_in_people)
+    tensor_page.check_displayed(element)
     # 5
-    element = tensor_page.find_element(TensorPage.more_link)
-    element.click()
+    tensor_page.find_element(TensorHomePage.more_link).click()
     sbis_page.check_current_url(tensor_about_url)
     # 6
-    tensor_page.verify_working_images(driver)
+    tensor_page.verify_working_images()
 
 
-def test_case_2(driver):
-    # 1
+def test_case_02(driver):
+
+    kamchatskij_kraj_url = 'https://sbis.ru/contacts/41-kamchatskij-kraj?tab=clients'
+    yar_obl = 'Ярославская обл.'
+    kamchatskij_kraj = 'Камчатский край'
+
     sbis_page = SbisHomePage(driver)
     partners = ListOfPartners(driver)
+
+    # 1
     sbis_page.open()
     sbis_page.find_element(sbis_page.contacts).click()
     # 2
-    region = sbis_page.find_element(sbis_page.region)
-    assert region.text == 'Ярославская обл.'
+    sbis_page.check_region(yar_obl)
     partners_list = sbis_page.find_element(sbis_page.partners_list)
-    assert partners_list.is_displayed()
+    sbis_page.check_displayed(partners_list)
     # 3
-    region.click()
-    sbis_page.find_element()
+    sbis_page.find_element(sbis_page.region).click()
+    partners.find_region(kamchatskij_kraj)
     # 4
-    element_3 = sbis_page.find_element()
-    assert element_3.text == 'Камчатский край'
-    assert driver.current_url == 'https://sbis.ru/contacts/41-kamchatskij-kraj?tab=clients'
-    element_4 = sbis_page.find_element()
-    assert element_4.is_displayed()
-    assert 'Петропавловск-Камчатский' in element_4.text
+    sbis_page.check_region(kamchatskij_kraj)
+
+    sbis_page.check_current_url(kamchatskij_kraj_url)
+    # element_4 = sbis_page.find_element()
+    # assert element_4.is_displayed()
+    # assert 'Петропавловск-Камчатский' in element_4.text
     assert driver.title == 'СБИС Контакты — Камчатский край'

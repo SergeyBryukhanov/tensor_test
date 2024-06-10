@@ -41,3 +41,11 @@ class BasePage:
         """
 
         assert self.driver.current_url == url
+
+    def check_displayed(self, element):
+        """
+        Проверить отображение элемента
+        :param element: локатор элемента
+        """
+
+        assert element.is_displayed()

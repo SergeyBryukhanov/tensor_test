@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.action_chains import ActionChains
-from base_page import BasePage
+from pages.base_page import BasePage
 
 
 class SbisHomePage(BasePage):
@@ -17,5 +17,16 @@ class SbisHomePage(BasePage):
     partners_list = (By.CSS_SELECTOR, '[data-qa="list"]')
 
     def open(self):
+        """
+        Открыть страницу
+        """
+
         self.driver.get(self.link)
 
+    def check_region(self, region: str):
+        """
+        Проверить регион
+        :param region: название региона
+        """
+
+        assert self.find_element(self.region).text == region
