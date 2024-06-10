@@ -6,6 +6,9 @@ from base_page import BasePage
 
 
 class TensorPage(BasePage):
+    """
+    Главная страница компании Тензор
+    """
     def __init__(self, driver):
         super().__init__(driver)
 
@@ -14,5 +17,16 @@ class TensorPage(BasePage):
     working_images = (By.CSS_SELECTOR, '.tensor_ru-About__block3')
 
     def open(self):
+        """
+        Перейти на главную страницу Тензора
+        """
+
         self.driver.get("https://tensor.ru/")
 
+    def verify_working_images(self, driver):
+        images = driver.find_elements(By.TAG_NAME, 'img')
+        same_images_check = []
+        for image in images[1:5]:
+            size = image.size
+            same_images_check.append((size['width'], size['height']))
+        assert len(set(same_images_check)) == 1

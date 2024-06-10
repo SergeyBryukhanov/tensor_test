@@ -19,5 +19,3 @@ class SbisHomePage(BasePage):
     def open(self):
         self.driver.get(self.link)
 
-    def find_images(self):
-        return self.driver.find_elements(self, By.TAG_NAME, 'img')

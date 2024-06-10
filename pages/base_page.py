@@ -1,11 +1,12 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 
 
 class BasePage:
+    """
+    Базовый класс для страниц
+    """
 
     def __init__(self, driver):
         self.driver = driver
@@ -15,7 +16,7 @@ class BasePage:
         Найти элемент и проскролить до него вниз по странице
         :param locator: локатор элемента
         :param time: время ожидания
-        :return:
+        :return: элемент
         """
 
         element = WebDriverWait(self.driver, time).until(EC.presence_of_element_located(locator))
@@ -25,12 +26,18 @@ class BasePage:
         actions.perform()
         return element
 
-    def move_to(self, element):
-        actions = ActionChains(self.driver)
-        actions.move_to_element(element)
-        return actions.perform()
-
-    def switch_windows(self, number):
+    def switch_windows(self, number: int):
+        """
+        Переключиться на другое окно браузера
+        :param number: номер окна браузера(нумерация с нуля)
+        """
         windows = self.driver.window_handles
-        return self.driver.switch_to.window(windows[number])
+        self.driver.switch_to.window(windows[number])
 
+    def check_current_url(self, url: str):
+        """
+        Проверить URL текущей страницы
+        :param url: URL для сравнения с текущим
+        """
+
+        assert self.driver.current_url == url
