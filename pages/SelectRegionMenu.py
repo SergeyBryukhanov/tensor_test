@@ -5,17 +5,19 @@ from selenium.webdriver.common.action_chains import ActionChains
 from pages.base_page import BasePage
 
 
-class ListOfPartners(BasePage):
+class RegionMenu(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    input = (By.TAG_NAME, "input")
+    input_field = (By.TAG_NAME, "input")
+    partners_list = (By.CSS_SELECTOR, '.sbis_ru-Region-Panel__list-l')
 
-    def find_region(self, region_name: str):
+    def select_region(self, region_name: str):
         """
-        Найти регион через поиск
+        Выбрать регион из списка
         :param region_name: название региона
         :return: регион
         """
 
-        return self.find_element(self.input).send_keys(region_name)
+        region = (By.XPATH, f'//*[contains(text(),"{region_name}")]')
+        self.find_element(region).click()

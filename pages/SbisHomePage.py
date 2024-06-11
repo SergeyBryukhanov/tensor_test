@@ -23,10 +23,28 @@ class SbisHomePage(BasePage):
 
         self.driver.get(self.link)
 
-    def check_region(self, region: str):
+    def check_region(self, region_name: str):
         """
         Проверить регион
-        :param region: название региона
+        :param region_name: название региона
         """
 
-        assert self.find_element(self.region).text == region
+        assert self.find_element(self.region).text == region_name
+
+    def check_partners_region(self, partner_text: str):
+        """
+        Проверить список партнеров текущего региона
+        :param partner_text: партнер
+        """
+
+        partners_list = self.find_element(self.partners_list)
+        assert partner_text in partners_list.text
+
+    def check_title(self, title: str):
+        """
+        Проверить название сайта
+        :param title:название сайта
+        """
+
+        assert self.driver.title == title
+

@@ -26,13 +26,13 @@ class BasePage:
         actions.perform()
         return element
 
-    def switch_windows(self, number: int):
+    def switch_windows(self, window: int):
         """
         Переключиться на другое окно браузера
-        :param number: номер окна браузера(нумерация с нуля)
+        :param window: номер окна браузера(нумерация с нуля)
         """
         windows = self.driver.window_handles
-        self.driver.switch_to.window(windows[number])
+        self.driver.switch_to.window(windows[window])
 
     def check_current_url(self, url: str):
         """
@@ -42,10 +42,11 @@ class BasePage:
 
         assert self.driver.current_url == url
 
-    def check_displayed(self, element):
+    def check_displayed(self, element_locator):
         """
         Проверить отображение элемента
-        :param element: локатор элемента
+        :param element_locator: локатор элемента
         """
 
+        element = self.find_element(element_locator)
         assert element.is_displayed()

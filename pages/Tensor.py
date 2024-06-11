@@ -24,6 +24,10 @@ class TensorHomePage(BasePage):
         self.driver.get("https://tensor.ru/")
 
     def verify_working_images(self):
+        """
+        Проверить, что все изображения блока 'Работаем' одного размера
+        """
+
         images = self.driver.find_elements(By.TAG_NAME, 'img')
         same_images_check = []
         for image in images[1:5]:
