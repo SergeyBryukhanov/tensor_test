@@ -95,6 +95,7 @@ def test_case_03(driver):
     response = sbis_dl.get_url_link(download_btn)
 
     sbis_dl.save_file(file_name=file_name, source=response)
+
     file_size = round((os.path.getsize(dir_path) / 1024 / 1024), 2)  # Вычисляем размер файла в МБ
     print(f'\n{file_size} МБ')
     assert os.path.exists(dir_path) == True

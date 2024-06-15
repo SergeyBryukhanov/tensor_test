@@ -20,7 +20,7 @@ class BasePage:
         Найти элемент и проскролить до него вниз по странице
         :param locator: локатор элемента
         :param time: время ожидания
-        :param arrow_down: если то сдвинуться вниз, нужно чтобы уведомление браузера о куки не закрывало элемент
+        :param arrow_down: если True, то сдвинуться вниз, нужно чтобы уведомление браузера о куки не закрывало элемент
         :return: элемент
         """
 
@@ -30,7 +30,7 @@ class BasePage:
         actions.perform()
         if arrow_down:
             element.send_keys(Keys.ARROW_DOWN)
-            sleep(0.3)
+            sleep(0.2)
         return element
 
     def switch_windows(self, window: int):
