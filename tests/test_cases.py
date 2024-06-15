@@ -81,18 +81,26 @@ def test_case_03(driver):
     dir_path = os.path.dirname(os.path.realpath(__file__))  # Путь до локальной директории
     file_path = dir_path + '\\' + file_name  # Добавляем к пути имя файла
 
-    sbis_page.open()  # Переход на sbis.ru
-    element = sbis_page.find_element(sbis_page.footer_dl, arrow_down=True)  # Находим кнопку "Скачать локальные версии"
+    # 1
+    sbis_page.open()
+
+    # 2
+    element = sbis_page.find_element(sbis_page.footer_dl, arrow_down=True)
     element.click()
 
+    # 3
     sbis_dl.find_element(sbis_dl.tab_plugin).click()
     sbis_dl.find_element(sbis_dl.windows_tab).click()
     download_btn = sbis_dl.find_element(sbis_dl.download_btn)
     source = sbis_dl.get_url_link(download_btn)
-
     sbis_dl.save_file(file_name=file_name, source=source)
+
+    # 4
     sbis_dl.check_file_saved(file_path)
 
+    # 5
     file_size = re.findall(r'\d+\.\d+', download_btn.text)[0]
     sbis_dl.check_file_size(file_path=file_path, file_size=file_size)
+
+    # Удалить файл после теста
     os.remove(path=file_path)
