@@ -1,5 +1,5 @@
 #  Тестовое задание на позицию QA Automation компании Тензор
-#  задание: https://cloud.mail.ru/attaches/17092842630329201983%3B0%3B1?folder-id=0&x-email=fizyaaa%40mail.ru&cvg=f
+#  задание: https://cloud.mail.ru/public/2WPt/aYxTGDtSx
 
 import re
 from pages.SbisHomePage import SbisHomePage
