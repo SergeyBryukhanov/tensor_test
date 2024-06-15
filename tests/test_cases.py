@@ -1,15 +1,12 @@
 #  Тестовое задание на позицию QA Automation компании Тензор
 #  задание: https://cloud.mail.ru/attaches/17092842630329201983%3B0%3B1?folder-id=0&x-email=fizyaaa%40mail.ru&cvg=f
 
-from time import sleep
-from selenium.webdriver import Keys
+import re
 from pages.SbisHomePage import SbisHomePage
 from pages.Tensor import TensorHomePage
 from pages.SelectRegionMenu import RegionMenu
 from pages.SbisDownloadPage import SbisDownloadPage
 import os
-import requests
-from selenium.webdriver.common.by import By
 
 
 def test_case_01(driver):
@@ -81,22 +78,21 @@ def test_case_03(driver):
     sbis_dl = SbisDownloadPage(driver)
 
     file_name = "sbis_plugin.exe"
-    dir_path = os.path.dirname(os.path.realpath(__file__))  # Путь локальной директории
-    dir_path += '\{0}'.format(file_name)
+    dir_path = os.path.dirname(os.path.realpath(__file__))  # Путь до локальной директории
+    file_path = dir_path + '\\' + file_name  # Добавляем к пути имя файла
 
     sbis_page.open()  # Переход на sbis.ru
-    element = sbis_page.find_element(sbis_page.footer_dl)  # Находим кнопку "Скачать локальные версии"
-    element.send_keys(Keys.END)
+    element = sbis_page.find_element(sbis_page.footer_dl, arrow_down=True)  # Находим кнопку "Скачать локальные версии"
     element.click()
 
     sbis_dl.find_element(sbis_dl.tab_plugin).click()
     sbis_dl.find_element(sbis_dl.windows_tab).click()
     download_btn = sbis_dl.find_element(sbis_dl.download_btn)
-    response = sbis_dl.get_url_link(download_btn)
+    source = sbis_dl.get_url_link(download_btn)
 
-    sbis_dl.save_file(file_name=file_name, source=response)
+    sbis_dl.save_file(file_name=file_name, source=source)
+    sbis_dl.check_file_saved(file_path)
 
-    file_size = round((os.path.getsize(dir_path) / 1024 / 1024), 2)  # Вычисляем размер файла в МБ
-    print(f'\n{file_size} МБ')
-    assert os.path.exists(dir_path) == True
-    os.remove(path=dir_path)
+    file_size = re.findall(r'\d+\.\d+', download_btn.text)[0]
+    sbis_dl.check_file_size(file_path=file_path, file_size=file_size)
+    os.remove(path=file_path)
