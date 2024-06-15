@@ -15,6 +15,7 @@ class SbisHomePage(BasePage):
     tensor_link = (By.CSS_SELECTOR, "[href='https://tensor.ru/']")
     region = (By.CSS_SELECTOR, '.sbis_ru-Region-Chooser__text')
     partners_list = (By.CSS_SELECTOR, '[data-qa="list"]')
+    footer_dl = (By.CSS_SELECTOR, '[href="/download"]')
 
     def open(self):
         """

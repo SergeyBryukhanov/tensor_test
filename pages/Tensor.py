@@ -28,9 +28,7 @@ class TensorHomePage(BasePage):
         Проверить, что все изображения блока 'Работаем' одного размера
         """
 
-        images = self.driver.find_elements(By.TAG_NAME, 'img')
-        same_images_check = []
-        for image in images[1:5]:
-            size = image.size
-            same_images_check.append((size['width'], size['height']))
+        images = self.driver.find_elements(By.CSS_SELECTOR, '.s-Grid-col img')
+        same_images_check = [(image.size['width'], image.size['height']) for image in images[:4]]
         assert len(set(same_images_check)) == 1
+
