@@ -78,8 +78,8 @@ def test_case_03(driver):
     sbis_dl = SbisDownloadPage(driver)
 
     file_name = "sbis_plugin.exe"
-    dir_path = os.path.dirname(os.path.realpath(__file__))  # Путь до локальной директории
-    file_path = dir_path + '\\' + file_name  # Добавляем к пути имя файла
+    dir_path = os.path.abspath(os.path.dirname(__file__))  # Путь до локальной директории
+    file_path = os.path.join(dir_path, file_name)  # Добавляем к пути имя файла
 
     # 1
     sbis_page.open()
