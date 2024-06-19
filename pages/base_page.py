@@ -5,6 +5,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 import requests
 import os
+from selenium.common import (NoSuchElementException, ElementNotInteractableException, ElementClickInterceptedException)
 
 
 class BasePage:
@@ -32,12 +33,10 @@ class BasePage:
 
         if arrow_down:
             element.send_keys(Keys.ARROW_DOWN)
-            from selenium.common import (NoSuchElementException, ElementNotInteractableException,
-                                         ElementClickInterceptedException)
 
-            errors = [NoSuchElementException, ElementNotInteractableException, ElementClickInterceptedException]
-            wait = WebDriverWait(self.driver, timeout=4, poll_frequency=.1, ignored_exceptions=errors)
-            wait.until(EC.element_to_be_clickable(element))
+        errors = [NoSuchElementException, ElementNotInteractableException, ElementClickInterceptedException]
+        wait = WebDriverWait(self.driver, timeout=4, poll_frequency=.1, ignored_exceptions=errors)
+        wait.until(EC.element_to_be_clickable(element))
         return element
 
     def switch_windows(self, window: int):
