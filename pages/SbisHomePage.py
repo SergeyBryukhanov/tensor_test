@@ -46,4 +46,3 @@ class SbisHomePage(BasePage):
         """
 
         assert self.driver.title == title
-

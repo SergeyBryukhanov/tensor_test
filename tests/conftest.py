@@ -2,7 +2,7 @@ import pytest
 from selenium import webdriver
 
 
-@pytest.fixture()
+@pytest.fixture(scope="class")
 def driver():
     """
     Фикстура для работы с браузера
