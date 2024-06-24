@@ -23,11 +23,12 @@ class SbisHomePage(BasePage):
 
     def check_region(self, region_name: str):
         """
-        Проверить регион
+        Проверить выбранный регион
         :param region_name: название региона
         """
 
-        assert self.find_element(self.region).text == region_name
+        region = self.find_element(self.region)
+        assert region.text == region_name  # Редко регион выбирается неверно, можно добавить обработку такого исхода
 
     def check_partners_region(self, partner_text: str):
         """
