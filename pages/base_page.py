@@ -35,7 +35,7 @@ class BasePage:
             element.send_keys(Keys.ARROW_DOWN)
 
         errors = [NoSuchElementException, ElementNotInteractableException, ElementClickInterceptedException]
-        wait = WebDriverWait(self.driver, timeout=4, poll_frequency=.1, ignored_exceptions=errors)
+        wait = WebDriverWait(self.driver, timeout=4, poll_frequency=.25, ignored_exceptions=errors)
         wait.until(EC.element_to_be_clickable(element))
         return element
 
