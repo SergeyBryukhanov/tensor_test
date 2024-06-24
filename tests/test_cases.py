@@ -4,7 +4,6 @@
 import os
 import re
 
-from selenium import webdriver
 from pages.SbisHomePage import SbisHomePage
 from pages.Tensor import TensorHomePage
 from pages.SelectRegionMenu import RegionMenu
