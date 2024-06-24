@@ -13,12 +13,7 @@ from pages.SbisDownloadPage import SbisDownloadPage
 
 class TestCases:
 
-    def setup_method(self):
-        self.driver = webdriver.Chrome()
-        self.driver.set_window_position(2000, 0)  # Переключить браузер на дополнительный монитор
-        self.driver.maximize_window()
-
-    def test_case_01(self):
+    def test_case_01(self, driver):
         """
         Первый тест-кейс, переход по страницам сайта Тензор
         """
@@ -26,8 +21,8 @@ class TestCases:
         tensor_url = "https://tensor.ru/"
         tensor_about_url = 'https://tensor.ru/about'
 
-        sbis_page = SbisHomePage(self.driver)
-        tensor_page = TensorHomePage(self.driver)
+        sbis_page = SbisHomePage(driver)
+        tensor_page = TensorHomePage(driver)
 
         # 1
         sbis_page.open()
@@ -46,7 +41,7 @@ class TestCases:
         # 6
         tensor_page.verify_working_images()
 
-    def test_case_02(self):
+    def test_case_02(self, driver):
         """
         Второй тест-кейс, смена региона и проверка списка партнеров
         """
@@ -57,8 +52,8 @@ class TestCases:
         petropavlovsk = 'Петропавловск-Камчатский'
         kamchatskij_kraj_title = 'СБИС Контакты — Камчатский край'
 
-        sbis_page = SbisHomePage(self.driver)
-        partners = RegionMenu(self.driver)
+        sbis_page = SbisHomePage(driver)
+        partners = RegionMenu(driver)
 
         # 1
         sbis_page.open()
@@ -75,13 +70,13 @@ class TestCases:
         sbis_page.check_current_url(url=kamchatskij_kraj_url)
         sbis_page.check_title(title=kamchatskij_kraj_title)
 
-    def test_case_03(self):
+    def test_case_03(self, driver):
         """
         Третий тест-кейс, проверка скачивания плагина
         """
 
-        sbis_page = SbisHomePage(self.driver)
-        sbis_dl = SbisDownloadPage(self.driver)
+        sbis_page = SbisHomePage(driver)
+        sbis_dl = SbisDownloadPage(driver)
 
         file_name = "sbis_plugin.exe"
         dir_path = os.path.abspath(os.path.dirname(__file__))  # Путь до локальной директории
@@ -110,6 +105,3 @@ class TestCases:
 
         # Удалить файл после теста
         os.remove(path=file_path)
-
-    def teardown_method(self):
-        self.driver.quit()

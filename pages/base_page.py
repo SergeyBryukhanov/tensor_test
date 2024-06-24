@@ -1,4 +1,3 @@
-from time import sleep
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
@@ -36,7 +35,8 @@ class BasePage:
 
         errors = [NoSuchElementException, ElementNotInteractableException, ElementClickInterceptedException]
         wait = WebDriverWait(self.driver, timeout=4, poll_frequency=.25, ignored_exceptions=errors)
-        wait.until(EC.element_to_be_clickable(element))
+        wait.until(EC.visibility_of(element))
+
         return element
 
     def switch_windows(self, window: int):
