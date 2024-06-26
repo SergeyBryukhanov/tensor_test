@@ -34,7 +34,7 @@ class BasePage:
             element.send_keys(Keys.ARROW_DOWN)
 
         errors = [NoSuchElementException, ElementNotInteractableException, ElementClickInterceptedException]
-        wait = WebDriverWait(self.driver, timeout=4, poll_frequency=.25, ignored_exceptions=errors)
+        wait = WebDriverWait(self.driver, timeout=4, poll_frequency=.1, ignored_exceptions=errors)
         wait.until(EC.visibility_of(element))
         wait.until(EC.element_to_be_clickable(element))
         return element
@@ -75,14 +75,14 @@ class BasePage:
         assert element_url.status_code == 200  # Проверяем статус запроса
         return element_url
 
-    def save_file(self, file_name, source):
+    def save_file(self, file_path, source):
         """
         Сохранить контент файла
-        :param file_name: имя, под которым файл сохранится
+        :param file_path: имя, под которым файл сохранится
         :param source: источник для скачивания файла
         """
 
-        with open(file_name, mode="wb") as file:
+        with open(file_path, mode="wb") as file:
             file.write(source.content)
 
     def check_file_saved(self, file_path: str):

@@ -93,7 +93,7 @@ class TestCases:
         sbis_dl.find_element(sbis_dl.windows_tab).click()
         download_btn = sbis_dl.find_element(sbis_dl.download_btn)
         source = sbis_dl.get_url_link(download_btn)
-        sbis_dl.save_file(file_name=file_name, source=source)
+        sbis_dl.save_file(file_path=file_path, source=source)
 
         # 4
         sbis_dl.check_file_saved(file_path)
