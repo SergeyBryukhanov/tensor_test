@@ -26,17 +26,22 @@ class TestCases:
         # 1
         sbis_page.open()
         sbis_page.find_element(locator=sbis_page.contacts).click()
+
         # 2
         sbis_page.find_element(locator=sbis_page.tensor_link).click()
+
         # 3
         sbis_page.switch_windows(window=1)
         sbis_page.check_current_url(url=tensor_url)
+
         # 4
         tensor_page.check_displayed(element_locator=TensorHomePage.power_in_people)
+
         # 5
         more_link = tensor_page.find_element(locator=TensorHomePage.more_link, arrow_down=True)
         more_link.click()
         sbis_page.check_current_url(url=tensor_about_url)
+
         # 6
         tensor_page.verify_working_images()
 
