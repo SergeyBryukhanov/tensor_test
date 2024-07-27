@@ -62,12 +62,15 @@ class TestCases:
         # 1
         sbis_page.open()
         sbis_page.find_element(locator=sbis_page.contacts).click()
+
         # 2
         sbis_page.check_region(region_name=yar_obl)
         sbis_page.check_displayed(element_locator=sbis_page.partners_list)
+
         # 3
         sbis_page.find_element(locator=sbis_page.region).click()
         partners.select_region(region_name=kamchatskij_kraj)
+
         # 4
         sbis_page.check_region(region_name=kamchatskij_kraj)
         sbis_page.check_partners_region(partner_text=petropavlovsk)
