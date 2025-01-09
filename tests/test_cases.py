@@ -50,11 +50,12 @@ class TestCases:
         Второй тест-кейс, смена региона и проверка списка партнеров
         """
 
-        kamchatskij_kraj_url = 'https://sbis.ru/contacts/41-kamchatskij-kraj?tab=clients'
+        kamchatskij_kraj_url = 'https://saby.ru/contacts/41-kamchatskij-kraj?tab=clients'
+
         yar_obl = 'Ярославская обл.'
         kamchatskij_kraj = 'Камчатский край'
         petropavlovsk = 'Петропавловск-Камчатский'
-        kamchatskij_kraj_title = 'СБИС Контакты — Камчатский край'
+        kamchatskij_kraj_title = 'Saby Контакты — Камчатский край'
 
         sbis_page = SbisHomePage(driver)
         partners = RegionMenu(driver)

@@ -10,4 +10,4 @@ class SbisDownloadPage(BasePage):
 
     tab_plugin = (By.XPATH, "//div[text()[contains(.,'СБИС Плагин')]]")
     windows_tab = (By.XPATH, "//span[text()[contains(.,'Windows')]]")
-    download_btn = (By.CSS_SELECTOR, '[href="https://update.sbis.ru/Sbis3Plugin/master/win32/sbisplugin-setup-web.exe"]')
+    download_btn = (By.CSS_SELECTOR, '[href="https://update.saby.ru/Sbis3Plugin/master/win32/sbisplugin-setup-web.exe"]')
